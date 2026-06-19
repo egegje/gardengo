@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GardenGo · Редактор сайта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app"></div>
+
+<!-- editor toolbar -->
+<div id="gg-bar">
+  <span style="font:700 14px Manrope;color:#fff;">✎ Редактор</span>
+  <span id="gg-status" class="dot">● сохранено</span>
+  <span class="sp"></span>
+  <button class="b-ghost" id="gg-reset" title="Вернуть к опубликованной версии">Сбросить</button>
+  <button class="b-ghost" id="gg-export">Экспорт</button>
+  <button class="b-ghost" id="gg-settings">⚙ Доступ</button>
+  <button class="b-save" id="gg-save">Сохранить черновик</button>
+  <button class="b-pub" id="gg-publish">Опубликовать для всех</button>
+</div>
+
+<!-- image picker -->
+<div class="gg-modal" id="gg-img-modal">
+  <div class="card">
+    <h3>Заменить фото</h3>
+    <label>Загрузить с устройства</label>
+    <input type="file" id="gg-img-file" accept="image/*">
+    <label>…или вставить ссылку на изображение</label>
+    <input type="url" id="gg-img-url" placeholder="https://…">
+    <div class="row">
+      <button class="ok" id="gg-img-ok">Применить</button>
+      <button class="cancel" id="gg-img-cancel">Отмена</button>
+    </div>
+    <small>Загруженный файл встраивается прямо в сайт. Для тяжёлых фото лучше вставлять ссылку.</small>
+  </div>
+</div>
+
+<!-- settings (publish access) -->
+<div class="gg-modal" id="gg-set-modal">
+  <div class="card">
+    <h3>Доступ для публикации</h3>
+    <small style="margin:0 0 6px;">«Опубликовать» сохраняет изменения в GitHub, и через ~1 минуту сайт обновляется для всех. Нужен персональный токен GitHub с правом записи в репозиторий. Токен хранится только в этом браузере.</small>
+    <label>GitHub токен</label>
+    <input type="password" id="gg-token" placeholder="ghp_…">
+    <label>Репозиторий (owner/name)</label>
+    <input type="text" id="gg-repo" placeholder="egegje/gardengo">
+    <label>Ветка</label>
+    <input type="text" id="gg-branch" placeholder="main">
+    <div class="row">
+      <button class="ok" id="gg-set-ok">Сохранить</button>
+      <button class="cancel" id="gg-set-cancel">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div class="gg-toast" id="gg-toast"></div>
+
+<script src="app.js"></script>
+<script>
+(() => {
+  "use strict";
+  // default publish target (can be overridden in ⚙ Доступ)
+  const DEFAULTS = { repo: 'egegje/gardengo', branch: 'main', path: 'content.json' };
+
+  const $ = (id) => document.getElementById(id);
+  const status = $('gg-status');
+  let dirty = false;
+
+  const toast = (msg) => {
+    const t = $('gg-toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2200);
+  };
+  const markClean = () => { dirty = false; status.textContent = '● сохранено'; status.classList.remove('dirty'); };
+  const markDirty = () => { dirty = true; status.textContent = '● есть несохранённые правки'; status.classList.add('dirty'); };
+
+  const saveDraft = () => { localStorage.setItem('gg_draft', JSON.stringify(GG.content)); };
+
+  // ---- image picker ----
+  let imgPath = null;
+  const openImg = (path) => { imgPath = path; $('gg-img-file').value=''; $('gg-img-url').value=''; $('gg-img-modal').classList.add('open'); };
+  const closeImg = () => $('gg-img-modal').classList.remove('open');
+  const setImg = (path, val) => {
+    const keys = path.split('.'); let o = GG.content;
+    for (let i=0;i<keys.length-1;i++) o = o[keys[i]];
+    o[keys[keys.length-1]] = val;
+    document.querySelectorAll(`.gimg[data-imgpath="${CSS.escape(path)}"]`).forEach(img => img.src = val);
+    saveDraft(); markDirty();
+  };
+  $('gg-img-ok').addEventListener('click', () => {
+    const url = $('gg-img-url').value.trim();
+    const file = $('gg-img-file').files[0];
+    if (file){
+      const fr = new FileReader();
+      fr.onload = () => { setImg(imgPath, fr.result); closeImg(); toast('Фото заменено'); };
+      fr.readAsDataURL(file);
+    } else if (url){ setImg(imgPath, url); closeImg(); toast('Фото заменено'); }
+    else closeImg();
+  });
+  $('gg-img-cancel').addEventListener('click', closeImg);
+
+  // ---- settings ----
+  const cfg = () => ({
+    token: localStorage.getItem('gg_token') || '',
+    repo: localStorage.getItem('gg_repo') || DEFAULTS.repo,
+    branch: localStorage.getItem('gg_branch') || DEFAULTS.branch,
+  });
+  $('gg-settings').addEventListener('click', () => {
+    const c = cfg();
+    $('gg-token').value = c.token; $('gg-repo').value = c.repo; $('gg-branch').value = c.branch;
+    $('gg-set-modal').classList.add('open');
+  });
+  $('gg-set-cancel').addEventListener('click', () => $('gg-set-modal').classList.remove('open'));
+  $('gg-set-ok').addEventListener('click', () => {
+    localStorage.setItem('gg_token', $('gg-token').value.trim());
+    localStorage.setItem('gg_repo', $('gg-repo').value.trim() || DEFAULTS.repo);
+    localStorage.setItem('gg_branch', $('gg-branch').value.trim() || DEFAULTS.branch);
+    $('gg-set-modal').classList.remove('open'); toast('Доступ сохранён');
+  });
+
+  // ---- save / reset / export ----
+  $('gg-save').addEventListener('click', () => { saveDraft(); markClean(); toast('Черновик сохранён'); });
+  $('gg-reset').addEventListener('click', () => {
+    if (!confirm('Сбросить все несохранённые/черновые правки и вернуть опубликованную версию?')) return;
+    localStorage.removeItem('gg_draft');
+    location.reload();
+  });
+  $('gg-export').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(GG.content, null, 2)], { type:'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'content.json'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  // ---- publish to GitHub ----
+  const b64 = (str) => btoa(unescape(encodeURIComponent(str)));
+  $('gg-publish').addEventListener('click', async () => {
+    const c = cfg();
+    if (!c.token){ toast('Сначала укажите токен в ⚙ Доступ'); $('gg-settings').click(); return; }
+    const [owner, repo] = c.repo.split('/');
+    if (!owner || !repo){ toast('Неверный репозиторий'); $('gg-settings').click(); return; }
+    const btn = $('gg-publish'); const old = btn.textContent; btn.textContent = 'Публикую…'; btn.disabled = true;
+    try {
+      saveDraft();
+      const api = `https://api.github.com/repos/${owner}/${repo}/contents/${DEFAULTS.path}`;
+      const headers = { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github+json' };
+      // get current sha (if file exists)
+      let sha;
+      const g = await fetch(`${api}?ref=${encodeURIComponent(c.branch)}`, { headers });
+      if (g.ok){ sha = (await g.json()).sha; }
+      const body = {
+        message: 'content: обновление через редактор',
+        content: b64(JSON.stringify(GG.content, null, 2)),
+        branch: c.branch,
+        ...(sha ? { sha } : {}),
+      };
+      const r = await fetch(api, { method:'PUT', headers, body: JSON.stringify(body) });
+      if (!r.ok){ const e = await r.json().catch(()=>({})); throw new Error(e.message || ('HTTP ' + r.status)); }
+      markClean();
+      toast('Опубликовано! Сайт обновится за ~1 минуту');
+    } catch(err){
+      toast('Ошибка публикации: ' + err.message);
+    } finally {
+      btn.textContent = old; btn.disabled = false;
+    }
+  });
+
+  // expose hooks used by app.js editing
+  window.GGAdmin = { _dirty: () => { saveDraft(); markDirty(); }, _pickImage: openImg };
+
+  // warn on unload if dirty
+  window.addEventListener('beforeunload', (e) => { if (dirty){ e.preventDefault(); e.returnValue = ''; } });
+
+  GG.boot({ admin:true }).then(markClean);
+})();
+</script>
+</body>
+</html>
