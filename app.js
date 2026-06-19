@@ -61,7 +61,7 @@
           ${sec.map(n => `<a class="nav-link" data-nav="${n.id}" href="#${n.id}" style="position:relative;text-decoration:none;color:#3A4138;font:600 14.5px Manrope,sans-serif;padding:6px 1px;white-space:nowrap;">${esc(n.label)}<span class="bar" style="position:absolute;left:0;right:0;bottom:-1px;height:2px;border-radius:2px;background:var(--accent);"></span></a>`).join('')}
         </nav>
         <div class="desktop-only" style="align-items:center;gap:16px;flex:none;">
-          <a href="tel:${esc(C.tel)}" style="text-decoration:none;color:#20261F;font:600 15px Manrope,sans-serif;white-space:nowrap;">${esc(C.phone)}</a>
+          <a class="ed" data-path="phone" href="tel:${esc(C.tel)}" style="text-decoration:none;color:#20261F;font:600 15px Manrope,sans-serif;white-space:nowrap;">${esc(C.phone)}</a>
           <a class="btn-primary" href="#contact" style="display:inline-flex;align-items:center;background:var(--accent);color:#fff;padding:11px 22px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;white-space:nowrap;">Консультация</a>
         </div>
         <div class="mobile-only" style="align-items:center;gap:9px;flex:none;">
@@ -282,7 +282,7 @@
         <div style="display:flex;flex-direction:column;gap:18px;">
           <a href="tel:${esc(C.tel)}" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:#1B221B;">
             <span style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #E0D8C6;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;">☎</span>
-            <span><span style="display:block;font:700 16px Manrope,sans-serif;">${esc(C.phone)}</span><span style="font:400 13px Manrope,sans-serif;color:#6B7163;">Звонок · WhatsApp · Telegram</span></span>
+            <span><span class="ed" data-path="phone" style="display:block;font:700 16px Manrope,sans-serif;">${esc(C.phone)}</span><span style="font:400 13px Manrope,sans-serif;color:#6B7163;">Звонок · WhatsApp · Telegram</span></span>
           </a>
           <div style="display:flex;align-items:center;gap:14px;color:#1B221B;">
             <span style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #E0D8C6;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;">⌖</span>
@@ -355,9 +355,9 @@
         <div>
           <div style="font:700 12px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7E8678;margin-bottom:16px;">Контакты</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="tel:${esc(C.tel)}" style="font:600 15px Manrope,sans-serif;color:#fff;text-decoration:none;">${esc(C.phone)}</a>
-            <a class="ftr-link" href="mailto:${esc(C.email)}" style="font:400 14px Manrope,sans-serif;color:#C9CFC2;text-decoration:none;">${esc(C.email)}</a>
-            <span style="font:400 14px/1.5 Manrope,sans-serif;color:#9AA194;">СПб, Средний пр. В.О., 79</span>
+            <a class="ed" data-path="phone" href="tel:${esc(C.tel)}" style="font:600 15px Manrope,sans-serif;color:#fff;text-decoration:none;">${esc(C.phone)}</a>
+            <a class="ftr-link ed" data-path="email" href="mailto:${esc(C.email)}" style="font:400 14px Manrope,sans-serif;color:#C9CFC2;text-decoration:none;">${esc(C.email)}</a>
+            ${E('span','address','font:400 14px/1.5 Manrope,sans-serif;color:#9AA194;')}
           </div>
         </div>
       </div>
@@ -440,7 +440,19 @@
       el.addEventListener('click', (e) => { if (el.closest('a')) e.preventDefault(); }, true);
       el.addEventListener('blur', () => {
         const v = el.innerText.replace(/ /g,' ').trim();
-        if (v !== String(get(el.dataset.path) ?? '')){ set(el.dataset.path, v); GGAdmin._dirty(); }
+        const path = el.dataset.path;
+        if (v === String(get(path) ?? '')) return;
+        set(path, v);
+        document.querySelectorAll('.ed[data-path="' + CSS.escape(path) + '"]').forEach(o => { if (o !== el && o.innerText.trim() !== v) o.innerText = v; });
+        if (path === 'phone'){
+          const tel = '+' + v.replace(/[^\d]/g,'');
+          set('tel', tel);
+          document.querySelectorAll('a[href^="tel:"]').forEach(a => a.setAttribute('href', 'tel:' + tel));
+        }
+        if (path === 'email'){
+          document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.setAttribute('href', 'mailto:' + v));
+        }
+        GGAdmin._dirty();
       });
     });
     // links shouldn't navigate in edit mode
