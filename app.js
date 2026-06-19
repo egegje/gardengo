@@ -113,9 +113,9 @@
         </div>
         <h1 style="font-family:'Lora',serif;font-weight:500;font-size:clamp(40px,5.4vw,72px);line-height:1.04;letter-spacing:-.015em;color:#1B221B;margin-bottom:24px;">${E('span','hero.title1','')}<br>${E('span','hero.title2','')}<em class="ed" data-path="hero.titleEm" style="font-style:italic;color:var(--accent);">${esc(get('hero.titleEm'))}</em></h1>
         ${E('p','hero.text','font:400 18px/1.62 Manrope,sans-serif;color:#565C50;max-width:520px;margin-bottom:36px;')}
-        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;">
-          <a class="btn-primary btn-primary-lg ed" data-path="hero.ctaPrimary" href="#contact" style="display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:17px 32px;border-radius:100px;font:600 15px Manrope,sans-serif;text-decoration:none;">${esc(get('hero.ctaPrimary'))}</a>
-          <a class="btn-outline ed" data-path="hero.ctaSecondary" href="#services" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--accent);padding:17px 30px;border-radius:100px;font:600 15px Manrope,sans-serif;text-decoration:none;border:1px solid var(--accent);">${esc(get('hero.ctaSecondary'))}</a>
+        <div class="hero-cta" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;">
+          <a class="btn-primary btn-primary-lg hero-btn ed" data-path="hero.ctaPrimary" href="#contact" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;padding:17px 32px;border-radius:100px;font:600 15px Manrope,sans-serif;text-decoration:none;">${esc(get('hero.ctaPrimary'))}</a>
+          <a class="btn-outline hero-btn ed" data-path="hero.ctaSecondary" href="#services" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:var(--accent);padding:17px 30px;border-radius:100px;font:600 15px Manrope,sans-serif;text-decoration:none;border:1px solid var(--accent);">${esc(get('hero.ctaSecondary'))}</a>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,40px);">
           ${C.stats.map((st,i) => `<div style="display:flex;flex-direction:column;gap:3px;">

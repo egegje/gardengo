@@ -58,6 +58,11 @@ a{color:inherit}
 @media (max-width:520px){
   body{font-size:15px}
 }
+/* phones: stack the two hero buttons aligned to a common left edge */
+@media (max-width:560px){
+  .hero-cta{flex-direction:column;align-items:flex-start}
+  .hero-cta .hero-btn{justify-content:center}
+}
 
 /* ===== admin edit affordances ===== */
 .gg-admin .ed{outline:1.5px dashed transparent;outline-offset:3px;border-radius:3px;transition:outline-color .15s,background .15s;cursor:text}
