@@ -61,7 +61,6 @@ a{color:inherit}
 /* phones: stack the two hero buttons aligned to a common left edge */
 @media (max-width:560px){
   .hero-cta{flex-direction:column;align-items:flex-start}
-  .hero-cta .hero-btn{justify-content:center}
 }
 
 /* ===== admin edit affordances ===== */
