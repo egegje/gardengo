@@ -1,6 +1,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:#F5F1E8;color:#20261F;font-family:'Manrope',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#F5F1E8;color:#20261F;font-family:'Manrope',system-ui,sans-serif;min-height:100vh;min-height:100svh;overflow-x:hidden;-webkit-tap-highlight-color:rgba(52,80,63,.12);-webkit-font-smoothing:antialiased}
+html,body{max-width:100%}
 img{display:block;max-width:100%}
 a{color:inherit}
 ::selection{background:#34503F;color:#fff}
@@ -47,6 +48,17 @@ a{color:inherit}
   .mobile-only{display:flex!important}
 }
 
+/* iPhone/Android: safe-area for notch & home indicator on the fixed bottom nav */
+#bottom-nav{padding-bottom:env(safe-area-inset-bottom)}
+@media (max-width:879px){
+  /* keep content clear of the fixed bottom bar incl. home indicator */
+  #top{padding-bottom:0}
+}
+/* phones: tighten hero card so it never pokes past the screen edge */
+@media (max-width:520px){
+  body{font-size:15px}
+}
+
 /* ===== admin edit affordances ===== */
 .gg-admin .ed{outline:1.5px dashed transparent;outline-offset:3px;border-radius:3px;transition:outline-color .15s,background .15s;cursor:text}
 .gg-admin .ed:hover{outline-color:rgba(52,80,63,.5);background:rgba(52,80,63,.05)}
@@ -57,7 +69,7 @@ a{color:inherit}
 body.gg-admin{padding-bottom:70px}
 
 /* admin toolbar */
-#gg-bar{position:fixed;left:0;right:0;bottom:0;z-index:200;background:#151914;color:#EFEAdd;display:flex;align-items:center;gap:10px;padding:10px 16px;box-shadow:0 -8px 30px rgba(0,0,0,.3);font:600 13px Manrope,system-ui,sans-serif;flex-wrap:wrap}
+#gg-bar{position:fixed;left:0;right:0;bottom:0;z-index:200;background:#151914;color:#EFEAdd;display:flex;align-items:center;gap:10px;padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(0,0,0,.3);font:600 13px Manrope,system-ui,sans-serif;flex-wrap:wrap}
 #gg-bar .sp{flex:1}
 #gg-bar button{font:600 13px Manrope,system-ui,sans-serif;border:none;border-radius:9px;padding:10px 16px;cursor:pointer}
 #gg-bar .b-save{background:#34503F;color:#fff}

@@ -105,7 +105,7 @@
 
   const heroHTML = () => `
   <section style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,56px) clamp(40px,5vw,72px);">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:clamp(36px,4.5vw,72px);align-items:center;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(36px,4.5vw,72px);align-items:center;">
       <div style="animation:ggFade .8s ease both;">
         <div style="display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border:1px solid #D8CFB9;border-radius:100px;background:rgba(255,255,255,.5);margin-bottom:28px;">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>
@@ -152,7 +152,7 @@
       </div>
       ${E('p','servicesHead.lead','font:400 16px/1.6 Manrope,sans-serif;color:#6B7163;max-width:320px;')}
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:22px;">
       ${C.services.map((s,i) => `
         <div class="svc-card" style="background:#fff;border:1px solid #ECE5D6;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;">
           <div style="position:relative;overflow:hidden;">
@@ -176,7 +176,7 @@
         ${E('h2','wallsHead.title','font-family:"Lora",serif;font-weight:500;font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em;color:#1B221B;margin-bottom:16px;')}
         ${E('p','wallsHead.lead','font:400 16px/1.6 Manrope,sans-serif;color:#6B7163;')}
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:20px;">
         ${C.walls.map((w,i) => `
           <div class="wall-card" style="background:#fff;border:1px solid #E6DFCF;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;">
             ${IMG(`walls.${i}.img`,'width:100%;height:188px;object-fit:cover;background:#E6ECE3;',w.name)}
@@ -197,7 +197,7 @@
 
   const productionHTML = () => `
   <section id="production" style="background:var(--accent-deep);color:#F2EEE3;">
-    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(40px,5vw,72px);align-items:center;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(40px,5vw,72px);align-items:center;">
       <div style="position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.3);">
         ${IMG('production.image','width:100%;height:clamp(360px,42vw,480px);object-fit:cover;background:#2a3a2f;','Производство фитостен GardenGo')}
       </div>
@@ -205,7 +205,7 @@
         ${E('div','production.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#9DB9A4;margin-bottom:18px;')}
         <h2 style="font-family:'Lora',serif;font-weight:500;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.015em;margin-bottom:22px;">${E('span','production.title1','')}<br>${E('span','production.title2','')}</h2>
         ${E('p','production.text','font:400 17px/1.62 Manrope,sans-serif;color:#C9D2C4;max-width:520px;margin-bottom:32px;')}
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:18px;">
           ${C.production.facts.map((f,i) => `<div style="border-top:1px solid rgba(255,255,255,.16);padding-top:14px;">
             ${E('div',`production.facts.${i}.n`,'font-family:"Lora",serif;font-weight:600;font-size:26px;color:#fff;margin-bottom:4px;')}
             ${E('div',`production.facts.${i}.l`,'font:500 13.5px/1.4 Manrope,sans-serif;color:#A9B6A6;')}
@@ -221,7 +221,7 @@
       ${E('div','processHead.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;')}
       ${E('h2','processHead.title','font-family:"Lora",serif;font-weight:500;font-size:clamp(30px,4vw,50px);line-height:1.08;letter-spacing:-.015em;color:#1B221B;')}
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px;background:#E6DFCF;border:1px solid #E6DFCF;border-radius:var(--radius);overflow:hidden;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:2px;background:#E6DFCF;border:1px solid #E6DFCF;border-radius:var(--radius);overflow:hidden;">
       ${C.steps.map((step,i) => `<div class="step-cell" style="background:#F8F5EC;padding:30px 24px;display:flex;flex-direction:column;gap:12px;min-height:200px;">
         ${E('span',`steps.${i}.n`,'font-family:"Lora",serif;font-weight:600;font-size:34px;color:var(--accent);opacity:.5;')}
         ${E('h3',`steps.${i}.t`,'font:700 16px Manrope,sans-serif;color:#1B221B;')}
@@ -240,7 +240,7 @@
         </div>
         <a class="ghost-btn ed" data-path="portfolioHead.cta" href="#contact" style="display:inline-flex;align-items:center;gap:9px;color:#F2EEE3;border:1px solid rgba(255,255,255,.3);padding:14px 26px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;">${esc(get('portfolioHead.cta'))}</a>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:14px;">
         ${C.portfolio.map((ph,i) => `<div style="overflow:hidden;border-radius:var(--radius);aspect-ratio:${ph.ratio};">${IMG(`portfolio.${i}.src`,'width:100%;height:100%;object-fit:cover;background:#2a3a2f;','Проект GardenGo')}</div>`).join('')}
       </div>
     </div>
@@ -248,7 +248,7 @@
 
   const shopHTML = () => !C.config.showShop ? '' : `
   <section id="shop" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,4.5vw,64px);align-items:center;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(36px,4.5vw,64px);align-items:center;">
       <div>
         ${E('div','shop.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;')}
         <h2 style="font-family:'Lora',serif;font-weight:500;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.015em;color:#1B221B;margin-bottom:22px;">${E('span','shop.title1','')}<br>${E('span','shop.title2','')}</h2>
@@ -274,7 +274,7 @@
 
   const contactHTML = () => `
   <section id="contact" style="background:var(--accent-tint);border-top:1px solid #E6DFCF;">
-    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(40px,5vw,72px);">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(40px,5vw,72px);">
       <div>
         ${E('div','contact.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;')}
         ${E('h2','contact.title','font-family:"Lora",serif;font-weight:500;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.015em;color:#1B221B;margin-bottom:20px;')}
@@ -297,13 +297,13 @@
       <div style="background:#fff;border:1px solid #E6DFCF;border-radius:var(--radius);padding:clamp(26px,3vw,38px);box-shadow:0 16px 40px rgba(30,45,30,.07);">
         <form id="lead-form" style="display:flex;flex-direction:column;gap:16px;">
           <label style="display:flex;flex-direction:column;gap:7px;font:600 13px Manrope,sans-serif;color:#3A4138;">Имя
-            <input class="field" name="name" placeholder="Как к вам обращаться" style="font:400 15px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;">
+            <input class="field" name="name" autocomplete="name" autocapitalize="words" placeholder="Как к вам обращаться" style="font:400 16px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;">
           </label>
           <label style="display:flex;flex-direction:column;gap:7px;font:600 13px Manrope,sans-serif;color:#3A4138;">Телефон
-            <input class="field" name="phone" type="tel" required placeholder="+7 ___ ___-__-__" style="font:400 15px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;">
+            <input class="field" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+7 ___ ___-__-__" style="font:400 16px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;">
           </label>
           <label style="display:flex;flex-direction:column;gap:7px;font:600 13px Manrope,sans-serif;color:#3A4138;">Сообщение
-            <textarea class="field" name="msg" placeholder="Помещение, размеры, пожелания" rows="3" style="font:400 15px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;resize:vertical;"></textarea>
+            <textarea class="field" name="msg" placeholder="Помещение, размеры, пожелания" rows="3" style="font:400 16px Manrope,sans-serif;padding:13px 16px;border:1px solid #E0D8C6;border-radius:10px;background:#FAF8F1;color:#1B221B;outline:none;resize:vertical;"></textarea>
           </label>
           <button class="btn-primary" type="submit" style="background:var(--accent);color:#fff;border:none;padding:16px;border-radius:100px;font:600 15px Manrope,sans-serif;cursor:pointer;">Отправить заявку</button>
           <p style="font:400 12px/1.45 Manrope,sans-serif;text-align:center;color:#8A9081;">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
@@ -318,15 +318,15 @@
   </section>`;
 
   const bottomNavHTML = () => `
-  <nav class="mobile-only" style="position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(245,241,232,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid #E6DFCF;align-items:stretch;box-shadow:0 -8px 24px rgba(30,45,30,.07);">
+  <nav id="bottom-nav" class="mobile-only" style="position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(245,241,232,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid #E6DFCF;align-items:stretch;box-shadow:0 -8px 24px rgba(30,45,30,.07);">
     ${bottomNavItems().map(b => `<a class="bnav-link" data-bnav="${b.id}" href="#${b.id}" style="position:relative;flex:1;display:flex;align-items:center;justify-content:center;padding:14px 2px;text-decoration:none;color:#6B7163;font:600 12px Manrope,sans-serif;text-align:center;"><span class="bar" style="position:absolute;top:0;left:20%;right:20%;height:3px;border-radius:0 0 3px 3px;background:var(--accent);"></span>${esc(b.label)}</a>`).join('')}
   </nav>
-  <div class="mobile-only" style="height:54px;"></div>`;
+  <div class="mobile-only" style="height:calc(54px + env(safe-area-inset-bottom));"></div>`;
 
   const footerHTML = () => `
   <footer style="background:#151914;color:#C9CFC2;">
     <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(20px,5vw,56px) 36px;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);">
         <div style="max-width:280px;">
           <div style="display:flex;align-items:baseline;gap:2px;margin-bottom:14px;">
             <span style="font-family:'Lora',serif;font-weight:600;font-size:24px;color:#fff;">${esc(C.brand)}</span>
