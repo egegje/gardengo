@@ -368,6 +368,41 @@
     </div>
   </footer>`;
 
+  const additionalHTML = () => `
+  <section style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,5vw,56px) clamp(72px,9vw,124px);">
+    <div style="max-width:660px;margin-bottom:40px;">
+      ${E('div','additional.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;')}
+      ${E('h2','additional.title','font-family:"Lora",serif;font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.1;letter-spacing:-.015em;color:#1B221B;margin-bottom:14px;')}
+      ${E('p','additional.lead','font:400 16px/1.6 Manrope,sans-serif;color:#6B7163;')}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px;">
+      ${C.additional.items.map((it,i) => `
+        <div style="background:rgba(255,255,255,.6);border:1px solid #ECE5D6;border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px 20px 22px;">
+          ${E('h3',`additional.items.${i}.t`,'font-family:"Lora",serif;font-weight:600;font-size:17px;line-height:1.25;color:#1B221B;margin-bottom:8px;')}
+          ${E('p',`additional.items.${i}.d`,'font:400 13.8px/1.55 Manrope,sans-serif;color:#6B7163;')}
+        </div>`).join('')}
+    </div>
+  </section>`;
+
+  const benefitsHTML = () => `
+  <section id="benefits" style="background:rgba(255,255,255,.5);border-top:1px solid #E6DFCF;border-bottom:1px solid #E6DFCF;">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);">
+      <div style="max-width:660px;margin-bottom:44px;">
+        ${E('div','benefits.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;')}
+        ${E('h2','benefits.title','font-family:"Lora",serif;font-weight:500;font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-.015em;color:#1B221B;margin-bottom:14px;')}
+        ${E('p','benefits.lead','font:400 16px/1.6 Manrope,sans-serif;color:#6B7163;')}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:18px;">
+        ${C.benefits.items.map((it,i) => `
+          <div style="background:#fff;border:1px solid #ECE5D6;border-radius:var(--radius);padding:24px 22px;display:flex;flex-direction:column;gap:10px;">
+            <span style="width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent-deep);display:inline-flex;align-items:center;justify-content:center;font:700 14px Manrope,sans-serif;flex:none;">${String(i+1).padStart(2,'0')}</span>
+            ${E('h3',`benefits.items.${i}.t`,'font-family:"Lora",serif;font-weight:600;font-size:18px;line-height:1.25;color:#1B221B;')}
+            ${E('p',`benefits.items.${i}.d`,'font:400 14px/1.55 Manrope,sans-serif;color:#6B7163;')}
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>`;
+
   /* ===== mount + behaviour ===== */
   function applyTheme(){
     const p = PALETTES[C.config.accent] || PALETTES['Лес'];
@@ -384,8 +419,8 @@
     applyTheme();
     document.getElementById('app').innerHTML =
       headerHTML() + drawerHTML() +
-      `<main id="top">` + heroHTML() + marqueeHTML() + servicesHTML() + wallsHTML() +
-      productionHTML() + processHTML() + portfolioHTML() + shopHTML() + contactHTML() +
+      `<main id="top">` + heroHTML() + marqueeHTML() + servicesHTML() + additionalHTML() + wallsHTML() +
+      productionHTML() + processHTML() + portfolioHTML() + shopHTML() + benefitsHTML() + contactHTML() +
       `</main>` + bottomNavHTML() + footerHTML();
     wire();
     if (ADMIN) enableEditing();
