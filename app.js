@@ -12,6 +12,13 @@
   let ADMIN = false;
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+  /* route heavy external images through a resizing CDN (small WebP, fast & reliable on mobile).
+     data:/relative/already-proxied URLs pass through unchanged. */
+  const proxied = (u, w=1200) => {
+    if (!u || /^data:/i.test(u) || u.charAt(0) === '/' || u.indexOf('images.weserv.nl') >= 0) return u;
+    return 'https://images.weserv.nl/?url=' + encodeURIComponent(u.replace(/^https?:\/\//i,'')) + '&w=' + w + '&q=72&output=webp&we';
+  };
+
   /* ---- path get/set: "hero.title1", "services.0.title", "walls.1.points.2" ---- */
   const get = (path) => path.split('.').reduce((o,k)=> (o==null?undefined:o[k]), C);
   const set = (path, val) => {
@@ -25,7 +32,7 @@
     `<${tag} class="ed" data-path="${path}" style="${style}" ${extra}>${esc(get(path))}</${tag}>`;
   /* editable image */
   const IMG = (path, style, alt='', loading='lazy') =>
-    `<img class="gimg" data-imgpath="${path}" src="${esc(get(path))}" alt="${esc(alt)}" loading="${loading}" decoding="async"${loading === 'eager' ? ' fetchpriority="high"' : ''} style="${style}">`;
+    `<img class="gimg" data-imgpath="${path}" src="${esc(proxied(get(path)))}" alt="${esc(alt)}" loading="${loading}" decoding="async"${loading === 'eager' ? ' fetchpriority="high"' : ''} style="${style}">`;
 
   /* ---- derived nav ---- */
   const navSections = () => {
@@ -154,7 +161,7 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:22px;">
       ${C.services.map((s,i) => `
-        <div class="svc-card" style="background:#fff;border:1px solid #ECE5D6;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;">
+        <div class="svc-card" data-svc="${i}" style="background:#fff;border:1px solid #ECE5D6;border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;">
           <div style="position:relative;overflow:hidden;">
             ${IMG(`services.${i}.img`,'width:100%;height:208px;object-fit:cover;background:#E6ECE3;',s.title)}
             ${E('span',`services.${i}.tag`,'position:absolute;top:14px;left:14px;background:rgba(245,241,232,.92);backdrop-filter:blur(4px);padding:6px 13px;border-radius:100px;font:600 11px Manrope,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-deep);')}
@@ -403,6 +410,24 @@
     </div>
   </section>`;
 
+  const serviceModalHTML = () => `
+  <div id="svc-modal" style="position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:18px;">
+    <div data-svc-close style="position:absolute;inset:0;background:rgba(20,25,18,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:ggOv .2s ease both;"></div>
+    <div style="position:relative;background:#fff;border-radius:var(--radius);max-width:560px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.32);animation:ggFade .3s ease both;">
+      <button data-svc-close aria-label="Закрыть" style="position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;border:none;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 4px 14px rgba(0,0,0,.15);font-size:17px;color:#20261F;cursor:pointer;line-height:1;">✕</button>
+      <img id="svc-modal-img" src="" alt="" style="width:100%;height:240px;object-fit:cover;background:#E6ECE3;border-radius:var(--radius) var(--radius) 0 0;">
+      <div style="padding:24px 26px 28px;">
+        <span id="svc-modal-tag" style="display:inline-block;background:var(--accent-soft);color:var(--accent-deep);padding:6px 13px;border-radius:100px;font:600 11px Manrope,sans-serif;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;"></span>
+        <h3 id="svc-modal-title" style="font-family:'Lora',serif;font-weight:600;font-size:24px;line-height:1.2;color:#1B221B;margin-bottom:12px;"></h3>
+        <p id="svc-modal-text" style="font:400 15px/1.62 Manrope,sans-serif;color:#565C50;margin-bottom:24px;"></p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <a data-svc-close href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:14px 24px;border:1px solid transparent;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;">Получить консультацию →</a>
+          <a href="tel:${esc(C.tel)}" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--accent);padding:14px 24px;border:1px solid var(--accent);border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;">Позвонить</a>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
   /* ===== mount + behaviour ===== */
   function applyTheme(){
     const p = PALETTES[C.config.accent] || PALETTES['Лес'];
@@ -421,7 +446,7 @@
       headerHTML() + drawerHTML() +
       `<main id="top">` + heroHTML() + marqueeHTML() + servicesHTML() + additionalHTML() + wallsHTML() +
       productionHTML() + processHTML() + portfolioHTML() + shopHTML() + benefitsHTML() + contactHTML() +
-      `</main>` + bottomNavHTML() + footerHTML();
+      `</main>` + bottomNavHTML() + footerHTML() + serviceModalHTML();
     wire();
     if (ADMIN) enableEditing();
   }
@@ -460,6 +485,26 @@
       form.style.display='none';
       document.getElementById('lead-done').style.display='flex';
     });
+
+    // service "Подробнее" modal (view mode only — in admin, cards stay editable)
+    const modal = document.getElementById('svc-modal');
+    if (modal && !ADMIN){
+      const closeModal = () => { modal.style.display='none'; document.body.style.overflow=''; };
+      const openModal = (i) => {
+        const s = C.services[i]; if (!s) return;
+        modal.querySelector('#svc-modal-img').src = proxied(s.img, 900);
+        modal.querySelector('#svc-modal-img').alt = s.title || '';
+        modal.querySelector('#svc-modal-tag').textContent = s.tag || '';
+        modal.querySelector('#svc-modal-title').textContent = s.title || '';
+        modal.querySelector('#svc-modal-text').textContent = s.more || s.desc || '';
+        document.body.style.overflow='hidden';
+        modal.style.display='flex';
+      };
+      document.querySelectorAll('.svc-card[data-svc]').forEach(card =>
+        card.addEventListener('click', () => openModal(+card.dataset.svc)));
+      modal.querySelectorAll('[data-svc-close]').forEach(el => el.addEventListener('click', closeModal));
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+    }
   }
 
   /* ===== admin editing ===== */
