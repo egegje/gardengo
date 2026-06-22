@@ -101,10 +101,10 @@
         </div>
         <div style="padding:16px 18px;border-top:1px solid #E6DFCF;display:flex;flex-direction:column;gap:11px;">
           <a data-close href="tel:${esc(C.tel)}" style="text-align:center;background:var(--accent);color:#fff;padding:15px;border-radius:100px;font:700 15px Manrope,sans-serif;text-decoration:none;">Позвонить · ${esc(C.phone)}</a>
-          <div style="display:flex;gap:10px;">
+          ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;">
             <a href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
             <a href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
-          </div>
+          </div>` : ''}
         </div>
       </div>
     </div>`;
@@ -289,16 +289,16 @@
         <div style="display:flex;flex-direction:column;gap:18px;">
           <a href="tel:${esc(C.tel)}" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:#1B221B;">
             <span style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #E0D8C6;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;">☎</span>
-            <span><span class="ed" data-path="phone" style="display:block;font:700 16px Manrope,sans-serif;">${esc(C.phone)}</span><span style="font:400 13px Manrope,sans-serif;color:#6B7163;">Звонок · WhatsApp · Telegram</span></span>
+            <span><span class="ed" data-path="phone" style="display:block;font:700 16px Manrope,sans-serif;">${esc(C.phone)}</span><span style="font:400 13px Manrope,sans-serif;color:#6B7163;">${C.config.showSocial !== false ? 'Звонок · WhatsApp · Telegram' : 'Звонок'}</span></span>
           </a>
           <div style="display:flex;align-items:center;gap:14px;color:#1B221B;">
             <span style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #E0D8C6;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;">⌖</span>
             <span>${E('span','contact.city','display:block;font:700 16px Manrope,sans-serif;')}${E('span','address','font:400 13px Manrope,sans-serif;color:#6B7163;')}</span>
           </div>
-          <div style="display:flex;gap:10px;margin-top:6px;">
+          ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;margin-top:6px;">
             <a class="msg-soft" href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
             <a class="msg-soft" href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
-          </div>
+          </div>` : ''}
         </div>
       </div>
       <div style="background:#fff;border:1px solid #E6DFCF;border-radius:var(--radius);padding:clamp(26px,3vw,38px);box-shadow:0 16px 40px rgba(30,45,30,.07);">

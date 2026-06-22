@@ -2,7 +2,8 @@
   "config": {
     "accent": "Лес",
     "corner": "Мягкие",
-    "showShop": true
+    "showShop": true,
+    "showSocial": false
   },
   "brand": "GardenGo",
   "phone": "+7 967 128-74-20",
