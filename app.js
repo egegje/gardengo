@@ -265,8 +265,8 @@
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:12px;">
           <a class="btn-primary btn-primary-lg ed" data-path="shop.ctaMain" href="${esc(get('shop.shopUrl'))}" style="display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;padding:15px 28px;border-radius:100px;font:600 15px Manrope,sans-serif;text-decoration:none;">${esc(get('shop.ctaMain'))}</a>
-          <a class="shop-link" href="${esc(get('shop.linkOzon'))}" style="display:inline-flex;align-items:center;background:#fff;color:#1B221B;padding:15px 24px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;border:1px solid #E0D8C6;">Ozon</a>
-          <a class="shop-link" href="${esc(get('shop.linkYandex'))}" style="display:inline-flex;align-items:center;background:#fff;color:#1B221B;padding:15px 24px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;border:1px solid #E0D8C6;">Яндекс Маркет</a>
+          ${C.config.showMarketplaces !== false ? `<a class="shop-link" href="${esc(get('shop.linkOzon'))}" style="display:inline-flex;align-items:center;background:#fff;color:#1B221B;padding:15px 24px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;border:1px solid #E0D8C6;">Ozon</a>
+          <a class="shop-link" href="${esc(get('shop.linkYandex'))}" style="display:inline-flex;align-items:center;background:#fff;color:#1B221B;padding:15px 24px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;border:1px solid #E0D8C6;">Яндекс Маркет</a>` : ''}
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
