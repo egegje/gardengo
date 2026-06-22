@@ -368,7 +368,8 @@
           </div>
         </div>
       </div>
-      <div style="padding-top:24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font:400 13px Manrope,sans-serif;color:#7E8678;">
+      ${get('footer.legal') ? E('div','footer.legal','padding-top:22px;font:400 12px/1.5 Manrope,sans-serif;color:#6E7568;') : ''}
+      <div style="padding-top:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font:400 13px Manrope,sans-serif;color:#7E8678;">
         ${E('span','footer.copy','')}
         ${E('span','footer.geo','')}
       </div>

@@ -7,10 +7,10 @@
     "showMarketplaces": false
   },
   "brand": "GardenGo",
-  "phone": "+7 967 128-74-20",
-  "tel": "+79671287420",
-  "email": "gardengospb@gmail.com",
-  "whatsapp": "https://api.whatsapp.com/send/?phone=79671287420",
+  "phone": "+7 931 536-85-47",
+  "tel": "+79315368547",
+  "email": "gardengospb812@mail.ru",
+  "whatsapp": "https://api.whatsapp.com/send/?phone=79315368547",
   "telegram": "https://t.me/gardengospb",
   "address": "Средний проспект В.О., 79 · мастерская",
   "hero": {
@@ -281,7 +281,8 @@
   "footer": {
     "about": "Студия фитодизайна, озеленения и декора. Эко-стиль, живые и искусственные растения. С 2017 года.",
     "copy": "© 2017–2026 GardenGo — Озеленение. Декор",
-    "geo": "Санкт-Петербург · Москва · по всему миру"
+    "geo": "Санкт-Петербург · Москва · по всему миру",
+    "legal": "ИП Семёнов Виктор Минаевич · ИНН 780158756398 · ОГРНИП 324730000026892"
   },
   "additional": {
     "kicker": "Полный спектр",
