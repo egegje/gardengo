@@ -103,7 +103,7 @@
           <a data-close href="tel:${esc(C.tel)}" style="text-align:center;background:var(--accent);color:#fff;padding:15px;border-radius:100px;font:700 15px Manrope,sans-serif;text-decoration:none;">Позвонить · ${esc(C.phone)}</a>
           ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;">
             <a href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
-            <a href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
+            ${C.telegram ? `<a href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>` : ''}
           </div>` : ''}
         </div>
       </div>
@@ -297,7 +297,7 @@
           </div>
           ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;margin-top:6px;">
             <a class="msg-soft" href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
-            <a class="msg-soft" href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
+            ${C.telegram ? `<a class="msg-soft" href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>` : ''}
           </div>` : ''}
         </div>
       </div>

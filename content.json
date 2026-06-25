@@ -11,7 +11,7 @@
   "tel": "+79315368547",
   "email": "gardengospb812@mail.ru",
   "whatsapp": "https://api.whatsapp.com/send/?phone=79315368547",
-  "telegram": "https://t.me/gardengospb",
+  "telegram": "",
   "address": "Средний проспект В.О., 79 · мастерская",
   "hero": {
     "badge": "Фитодизайн · Санкт-Петербург",
@@ -263,9 +263,9 @@
       "Оплата по ЭДО"
     ],
     "ctaMain": "В магазин SemenovLab →",
-    "linkOzon": "https://www.ozon.ru/brand/gardengo-100162377/",
-    "linkYandex": "https://market.yandex.ru/business--gardengo-studiia-ozeleneniia-i-dekora/19689259",
-    "shopUrl": "https://gardengospb.com/shop/all",
+    "linkOzon": "",
+    "linkYandex": "",
+    "shopUrl": "",
     "img1": "https://siteindex001.ucoz.net/home-photo/15.jpg",
     "img2": "https://siteindex001.ucoz.net/home-photo/18.jpg",
     "img3": "https://siteindex001.ucoz.net/home-photo/9.jpg"
