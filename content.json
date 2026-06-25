@@ -6,7 +6,7 @@
     "showSocial": false,
     "showMarketplaces": false
   },
-  "brand": "GardenGo",
+  "brand": "SemenovLab",
   "phone": "+7 931 536-85-47",
   "tel": "+79315368547",
   "email": "gardengospb812@mail.ru",
@@ -262,7 +262,7 @@
       "Подарочная упаковка",
       "Оплата по ЭДО"
     ],
-    "ctaMain": "В магазин GardenGo →",
+    "ctaMain": "В магазин SemenovLab →",
     "linkOzon": "https://www.ozon.ru/brand/gardengo-100162377/",
     "linkYandex": "https://market.yandex.ru/business--gardengo-studiia-ozeleneniia-i-dekora/19689259",
     "shopUrl": "https://gardengospb.com/shop/all",
@@ -280,7 +280,7 @@
   },
   "footer": {
     "about": "Студия фитодизайна, озеленения и декора. Эко-стиль, живые и искусственные растения. С 2017 года.",
-    "copy": "© 2017–2026 GardenGo — Озеленение. Декор",
+    "copy": "© 2017–2026 SemenovLab — Озеленение. Декор",
     "geo": "Санкт-Петербург · Москва · по всему миру",
     "legal": "ИП Семёнов Виктор Минаевич · ИНН 780158756398 · ОГРНИП 324730000026892"
   },
