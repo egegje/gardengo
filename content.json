@@ -2,16 +2,16 @@
   "config": {
     "accent": "Лес",
     "corner": "Мягкие",
-    "showShop": false,
-    "showSocial": false,
-    "showMarketplaces": false
+    "showShop": true,
+    "showSocial": true,
+    "showMarketplaces": true
   },
-  "brand": "SemenovLab",
+  "brand": "GardenGo",
   "phone": "+7 931 536-85-47",
   "tel": "+79315368547",
-  "email": "semenovlab@mail.ru",
+  "email": "gardengospb812@mail.ru",
   "whatsapp": "https://api.whatsapp.com/send/?phone=79315368547",
-  "telegram": "",
+  "telegram": "https://t.me/gardengospb",
   "address": "Средний проспект В.О., 79 · мастерская",
   "hero": {
     "badge": "Фитодизайн · Санкт-Петербург",
@@ -262,10 +262,10 @@
       "Подарочная упаковка",
       "Оплата по ЭДО"
     ],
-    "ctaMain": "В магазин SemenovLab →",
-    "linkOzon": "",
-    "linkYandex": "",
-    "shopUrl": "",
+    "ctaMain": "В магазин GardenGo →",
+    "linkOzon": "https://www.ozon.ru/brand/gardengo-100162377/",
+    "linkYandex": "https://market.yandex.ru/business--gardengo-studiia-ozeleneniia-i-dekora/19689259",
+    "shopUrl": "https://gardengospb.com/shop/all",
     "img1": "https://siteindex001.ucoz.net/home-photo/15.jpg",
     "img2": "https://siteindex001.ucoz.net/home-photo/18.jpg",
     "img3": "https://siteindex001.ucoz.net/home-photo/9.jpg"
@@ -280,7 +280,7 @@
   },
   "footer": {
     "about": "Студия фитодизайна, озеленения и декора. Эко-стиль, живые и искусственные растения. С 2017 года.",
-    "copy": "© 2017–2026 SemenovLab — Озеленение. Декор",
+    "copy": "© 2017–2026 GardenGo — Озеленение. Декор",
     "geo": "Санкт-Петербург · Москва · по всему миру",
     "legal": "ИП Семёнов Виктор Минаевич · ИНН 780158756398 · ОГРНИП 324730000026892"
   },

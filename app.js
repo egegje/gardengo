@@ -1,4 +1,4 @@
-/* SemenovLab — data-driven renderer. Works in view mode (index.html) and edit mode (admin.html). */
+/* GardenGo — data-driven renderer. Works in view mode (index.html) and edit mode (admin.html). */
 (() => {
   "use strict";
 
@@ -103,7 +103,7 @@
           <a data-close href="tel:${esc(C.tel)}" style="text-align:center;background:var(--accent);color:#fff;padding:15px;border-radius:100px;font:700 15px Manrope,sans-serif;text-decoration:none;">Позвонить · ${esc(C.phone)}</a>
           ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;">
             <a href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
-            ${C.telegram ? `<a href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>` : ''}
+            <a href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
           </div>` : ''}
         </div>
       </div>
@@ -133,7 +133,7 @@
       </div>
       <div style="position:relative;animation:ggFade 1s ease both;">
         <div style="border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 70px rgba(30,45,30,.16);">
-          ${IMG('hero.image','width:100%;height:clamp(360px,56vw,620px);object-fit:cover;background:#E6ECE3;','Фитодизайн интерьера SemenovLab','eager')}
+          ${IMG('hero.image','width:100%;height:clamp(360px,56vw,620px);object-fit:cover;background:#E6ECE3;','Фитодизайн интерьера GardenGo','eager')}
         </div>
         <div style="position:absolute;left:-8px;bottom:26px;background:#fff;border-radius:var(--radius);padding:18px 22px;box-shadow:0 16px 40px rgba(30,45,30,.16);max-width:260px;border:1px solid #EFE9DA;">
           ${E('div','hero.cardTitle','font:700 12px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;')}
@@ -206,7 +206,7 @@
   <section id="production" style="background:var(--accent-deep);color:#F2EEE3;">
     <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(40px,5vw,72px);align-items:center;">
       <div style="position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.3);">
-        ${IMG('production.image','width:100%;height:clamp(360px,42vw,480px);object-fit:cover;background:#2a3a2f;','Производство фитостен SemenovLab')}
+        ${IMG('production.image','width:100%;height:clamp(360px,42vw,480px);object-fit:cover;background:#2a3a2f;','Производство фитостен GardenGo')}
       </div>
       <div>
         ${E('div','production.kicker','font:600 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#9DB9A4;margin-bottom:18px;')}
@@ -248,7 +248,7 @@
         <a class="ghost-btn ed" data-path="portfolioHead.cta" href="#contact" style="display:inline-flex;align-items:center;gap:9px;color:#F2EEE3;border:1px solid rgba(255,255,255,.3);padding:14px 26px;border-radius:100px;font:600 14px Manrope,sans-serif;text-decoration:none;">${esc(get('portfolioHead.cta'))}</a>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:14px;">
-        ${C.portfolio.map((ph,i) => `<div style="overflow:hidden;border-radius:var(--radius);aspect-ratio:${ph.ratio};">${IMG(`portfolio.${i}.src`,'width:100%;height:100%;object-fit:cover;background:#2a3a2f;','Проект SemenovLab')}</div>`).join('')}
+        ${C.portfolio.map((ph,i) => `<div style="overflow:hidden;border-radius:var(--radius);aspect-ratio:${ph.ratio};">${IMG(`portfolio.${i}.src`,'width:100%;height:100%;object-fit:cover;background:#2a3a2f;','Проект GardenGo')}</div>`).join('')}
       </div>
     </div>
   </section>`;
@@ -297,7 +297,7 @@
           </div>
           ${C.config.showSocial !== false ? `<div style="display:flex;gap:10px;margin-top:6px;">
             <a class="msg-soft" href="${esc(C.whatsapp)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">WhatsApp</a>
-            ${C.telegram ? `<a class="msg-soft" href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>` : ''}
+            <a class="msg-soft" href="${esc(C.telegram)}" style="flex:1;text-align:center;background:#fff;border:1px solid #E0D8C6;border-radius:100px;padding:13px;font:600 14px Manrope,sans-serif;color:#1B221B;text-decoration:none;">Telegram</a>
           </div>` : ''}
         </div>
       </div>
